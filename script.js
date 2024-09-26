@@ -24,14 +24,13 @@ const loadImages = (query) => {
         .catch(err => console.log("Error:", err));
 };
 
-// Use one function for both buttons
 document.getElementById("loadImages").addEventListener("click", () => loadImages(queries.hamsters));
 document.getElementById("loadOtherImages").addEventListener("click", () => loadImages(queries.anime));
 
 document.getElementById("searchButton").addEventListener("click", () => {
     const searchQuery = document.getElementById("searchInput").value.trim();
     if (searchQuery) {
-        loadImages(searchQuery);  // Load images based on user input
+        loadImages(searchQuery);  
     } else {
         console.log("Please enter a valid search term.");
     }
