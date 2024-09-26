@@ -7,12 +7,17 @@ const updateImages = (photos) => {
     cards.forEach((card, i) => {
         const img = card.querySelector("img");
         const text = card.querySelector(".text-muted");
+        const removeButton = card.querySelector(".remove");
         
         if (photos[i]) {
             img.src = photos[i].src.medium;
             img.style.height = "250px";
             img.classList.add("object-fit-cover");
             text.innerText = `Photo ID: ${photos[i].id}`;
+            removeButton.innerText = "Remove";
+            removeButton.addEventListener("click", () => {
+                card.remove();
+            })
         }
     });
 };
