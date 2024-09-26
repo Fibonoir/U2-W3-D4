@@ -3,11 +3,16 @@ const apiUrl = 'https://api.pexels.com/v1/search?query=';
 const queries = { hamsters: "islands", anime: "sunset" };
 
 const updateImages = (photos) => {
-    document.querySelectorAll(".card img").forEach((img, i) => {
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card, i) => {
+        const img = card.querySelector("img");
+        const text = card.querySelector(".text-muted");
+        
         if (photos[i]) {
             img.src = photos[i].src.medium;
             img.style.height = "250px";
             img.classList.add("object-fit-cover");
+            text.innerText = `Photo ID: ${photos[i].id}`;
         }
     });
 };
@@ -22,3 +27,12 @@ const loadImages = (query) => {
 // Use one function for both buttons
 document.getElementById("loadImages").addEventListener("click", () => loadImages(queries.hamsters));
 document.getElementById("loadOtherImages").addEventListener("click", () => loadImages(queries.anime));
+
+document.getElementById("searchButton").addEventListener("click", () => {
+    const searchQuery = document.getElementById("searchInput").value.trim();
+    if (searchQuery) {
+        loadImages(searchQuery);  // Load images based on user input
+    } else {
+        console.log("Please enter a valid search term.");
+    }
+});
